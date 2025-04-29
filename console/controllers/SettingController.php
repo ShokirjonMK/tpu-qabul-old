@@ -22,62 +22,11 @@ use common\models\StudentPerevot;
 use common\models\User;
 use Yii;
 use yii\console\Controller;
-//use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use yii\httpclient\Client;
-use PhpOffice\PhpWord\IOFactory;
 
 class SettingController extends Controller
 {
-
-    public function actionWord()
-    {
-        $inputFileName = __DIR__ . '/word/ddx.docx';
-        $phpWord = IOFactory::load($inputFileName);
-
-        $data = []; // Ma'lumotlarni saqlash uchun array
-
-        // Hujjatdagi barcha sectionlarni o‘qib chiqamiz
-        $sections = $phpWord->getSections();
-        if (isset($sections[3])) { // 4-seksiyaga mos ravishda
-            $section = $sections[3];
-
-            // Section ichidagi barcha elementlarni o‘qiymiz
-            foreach ($section->getElements() as $element) {
-                if ($element instanceof Table) {
-                    $tableData = [];
-
-                    // Har bir qatorni o'qish
-                    foreach ($element->getRows() as $row) {
-                        $rowData = [];
-                        foreach ($row->getCells() as $cell) {
-                            // Matnni olish
-                            $cellText = '';
-                            foreach ($cell->getElements() as $cellElement) {
-                                if (method_exists($cellElement, 'getText')) {
-                                    $cellText .= $cellElement->getText() . " ";
-                                }
-                            }
-                            $rowData[] = trim($cellText); // Matnni yig‘ish
-                        }
-                        $tableData[] = $rowData; // Qatorni jadval arrayiga qo'shish
-                    }
-
-                    $data[] = $tableData; // Jadvalni asosiy arrayga qo'shish
-                }
-            }
-        }
-
-        print_r($data); // Natijani chiqarish
-    }
-
-
-
-
-
-
-
-
-
 
     public function actionIk0()
     {
